@@ -25,7 +25,7 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
 
             $room = $this->getReference('room_' . $i);
 
-            for ($i = 0; $i < $faker->numberBetween(3, 6); $i++) {
+            for ($j = 0; $j < $faker->numberBetween(3, 6); $j++) {
                 $setHour = $faker->randomElement($hourNumber);
 
                 $reservation = new Reservation;
