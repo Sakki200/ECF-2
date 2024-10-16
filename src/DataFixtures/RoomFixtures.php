@@ -61,8 +61,6 @@ class RoomFixtures extends Fixture
             'room19.jpg'
         ];
 
-
-
         for ($i = 0; $i < 20; $i++) {
             $room = new Room;
             $room

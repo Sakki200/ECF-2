@@ -10,20 +10,22 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class ReservationFixtures extends Fixture implements DependentFixtureInterface
 {
-    public function __construct() {}
+    public function __construct()
+    {
+        ini_set('memory_limit', '512M');
+    }
 
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
 
-        $hourNumber = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
-
+        $hourNumber = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 
         for ($i = 0; $i < 20; $i++) {
 
             $room = $this->getReference('room_' . $i);
 
-            for ($i = 0; $i < $faker->numberBetween(3, 6); $i++) {
+            for ($j = 0; $j < $faker->numberBetween(3, 6); $j++) {
                 $setHour = $faker->randomElement($hourNumber);
 
                 $reservation = new Reservation;
