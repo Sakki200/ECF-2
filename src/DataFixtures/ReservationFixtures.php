@@ -10,8 +10,8 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class ReservationFixtures extends Fixture implements DependentFixtureInterface
 {
-    public function __construct()
-    {
+
+    public function __construct() {
         ini_set('memory_limit', '512M');
     }
 
@@ -20,7 +20,7 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
         $faker = Factory::create('fr_FR');
 
         $hourNumber = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-
+      
         for ($i = 0; $i < 20; $i++) {
 
             $room = $this->getReference('room_' . $i);
