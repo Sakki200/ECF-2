@@ -11,8 +11,7 @@ security:
                 property: email
 
     role_hierarchy:
-        ROLE_PREMIUM: 'ROLE_USER' # Ce rôle est plus fort que USER
-        ROLE_ADMIN: ['ROLE_PREMIUM'] # Ce rôle est plus fort que PREMIUM
+        ROLE_ADMIN: 'ROLE_USER' # Ce rôle est plus fort que USER
         # ROLE_SUPERADMIN: ['ROLE_ADMIN'] # Ce rôle est plus fort que ADMIN
 
     firewalls:
