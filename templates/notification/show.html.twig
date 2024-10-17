@@ -1,0 +1,5 @@
+{% if 'ROLE_ADMIN' in app.user.roles %}
+	<h1>Gestion des demandes de réservations</h1>
+{% else %}
+	<h1>Vous vous êtes perdu ?</h1>
+{% endif %}
