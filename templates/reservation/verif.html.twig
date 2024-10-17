@@ -3,10 +3,14 @@
 {% block title %}Réservation -
 {% endblock %}
 
-{% block javascripts %}
-	<script src="assets/reservationForm.js"></script>
+{% block javascript %}
+	<script src="{{asset('js/reservationForm.js')}}" type="text/javascript"></script>
+	{% block importmap %}
+		{{ importmap('app') }}
+	{% endblock %}
 {% endblock %}
 
 {% block body %}
-	<h1>Vous souhaitez réservé notre salle{{room.name}}?</h1>
+	<h1>Vous souhaitez réservé notre
+		{{room.name|replace({(room.name|capitalize|first): (room.name|first|lower)})}}?</h1>
 	{{form(formReservation)}}{% endblock %}

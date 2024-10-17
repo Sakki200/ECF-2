@@ -28,12 +28,14 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
             for ($j = 0; $j < $faker->numberBetween(3, 6); $j++) {
                 $setHour = $faker->randomElement($hourNumber);
 
+                $dateTime = $faker->dateTimeBetween('now', '+1 month');
+
                 $reservation = new Reservation;
                 $reservation
                     ->setStart($setHour)
                     ->setEndReservation($setHour + $faker->numberBetween(1, 4))
                     ->setValidated(false)
-                    ->setDateReservation($faker->dateTimeBetween('now', '+1 month'))
+                    ->setDateReservation($dateTime->setTime(0, 0, 0))
                     ->setUser($this->getReference('user_' . $faker->numberBetween(0, 29)))
                     ->setRoom($room)
                 ;

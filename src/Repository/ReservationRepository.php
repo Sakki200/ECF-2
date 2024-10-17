@@ -16,12 +16,15 @@ class ReservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservation::class);
     }
 
-    public function findOneByDate($date): array
+    public function findByDate($date, $room): array
     {
         return $this->createQueryBuilder('r')
             ->where('r.date_reservation = :d')
-            ->andWhere()
+            ->andWhere('r.room = :room')
+            ->andWhere('r.is_validated = :valid')
             ->setParameter('d', $date)
+            ->setParameter('room', $room)
+            ->setParameter('valid', false)
             ->orderBy('r.id', 'ASC')
             ->getQuery()
             ->getResult()

@@ -65,12 +65,14 @@ class EquipmentFixtures extends Fixture implements DependentFixtureInterface
             $equipment->setName($option);
             $equipment->setSoftware(false);
             $manager->persist($equipment);
+            $manager->flush();
         }
 
         foreach ($softwareOptions as $option) {
             $equipment->setName($option);
             $equipment->setSoftware(true);
             $manager->persist($equipment);
+            $manager->flush();
         }
 
         for ($i = 0; $i < $faker->numberBetween(70, 90); $i++) {
@@ -80,8 +82,8 @@ class EquipmentFixtures extends Fixture implements DependentFixtureInterface
             $roomEquipments->setQuantity($faker->numberBetween(1, 5));
 
             $manager->persist($roomEquipments);
+            $manager->flush();
         }
-        $manager->flush();
     }
 
 

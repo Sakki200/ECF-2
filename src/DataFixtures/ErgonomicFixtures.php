@@ -36,6 +36,7 @@ class ErgonomicFixtures extends Fixture implements DependentFixtureInterface
         foreach ($ergonomicOptions as $option) {
             $ergonomic->setName($option);
             $manager->persist($ergonomic);
+            $manager->flush();
         }
 
         for ($i = 0; $i < $faker->numberBetween(30, 60); $i++) {
@@ -44,9 +45,8 @@ class ErgonomicFixtures extends Fixture implements DependentFixtureInterface
             $roomergonomics->setergonomic($ergonomic);
 
             $manager->persist($roomergonomics);
+            $manager->flush();
         }
-
-        $manager->flush();
     }
 
     public function getDependencies()
