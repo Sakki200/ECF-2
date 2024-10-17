@@ -6,6 +6,8 @@ use App\Entity\Equipment;
 use App\Entity\Ergonomic;
 use App\Entity\Reservation;
 use App\Entity\Room;
+use App\Entity\RoomEquipment;
+use App\Entity\RoomErgonomic;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -52,6 +54,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Reservation', 'fas fa-plus', Reservation::class);
         yield MenuItem::linkToCrud('Equipment', 'fas fa-id-card', Equipment::class);
         yield MenuItem::linkToCrud('Ergonomic', 'fas fa-list', Ergonomic::class);
+        yield MenuItem::linkToCrud('AddEquipmentInRoom', 'fas fa-list', RoomEquipment::class);
+        yield MenuItem::linkToCrud('AddErgonomicInRoom', 'fas fa-list', RoomErgonomic::class);
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
