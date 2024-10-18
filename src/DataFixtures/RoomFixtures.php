@@ -39,29 +39,27 @@ class RoomFixtures extends Fixture
         ];
 
         $roomImg = [
-            'room0.jpg',
-            'room1.jpg',
-            'room2.jpg',
-            'room3.jpg',
-            'room4.jpg',
-            'room5.jpg',
-            'room6.jpg',
-            'room7.jpg',
-            'room8.jpg',
-            'room9.jpg',
-            'room10.jpg',
-            'room11.jpg',
-            'room12.jpg',
-            'room13.jpg',
-            'room14.jpg',
-            'room15.jpg',
-            'room16.jpg',
-            'room17.jpg',
-            'room18.jpg',
-            'room19.jpg'
+            'room_0.jpg',
+            'room_1.jpg',
+            'room_2.jpg',
+            'room_3.jpg',
+            'room_4.jpg',
+            'room_5.jpg',
+            'room_6.jpg',
+            'room_7.jpg',
+            'room_8.jpg',
+            'room_9.jpg',
+            'room_10.jpg',
+            'room_11.jpg',
+            'room_12.jpg',
+            'room_13.jpg',
+            'room_14.jpg',
+            'room_15.jpg',
+            'room_16.jpg',
+            'room_17.jpg',
+            'room_18.jpg',
+            'room_19.jpg'
         ];
-
-
 
         for ($i = 0; $i < 20; $i++) {
             $room = new Room;

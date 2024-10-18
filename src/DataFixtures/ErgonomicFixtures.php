@@ -17,10 +17,6 @@ class ErgonomicFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create('fr_FR');
 
-        $ergonomic = new Ergonomic;
-        $roomergonomics = new RoomErgonomic;
-
-
         $ergonomicOptions = [
             'Lumière naturelle',
             'Fenêtre ouvrante',
@@ -34,18 +30,21 @@ class ErgonomicFixtures extends Fixture implements DependentFixtureInterface
         ];
 
         foreach ($ergonomicOptions as $option) {
+            $ergonomic = new Ergonomic;
             $ergonomic->setName($option);
             $manager->persist($ergonomic);
         }
+        $manager->flush();
 
         for ($i = 0; $i < $faker->numberBetween(30, 60); $i++) {
+            $roomergonomics = new RoomErgonomic;
             $room = $this->getReference('room_' . $faker->numberBetween(0, 19));
-            $roomergonomics->setRoom($room);
-            $roomergonomics->setergonomic($ergonomic);
+            $roomergonomics
+                ->setRoom($room)
+                ->setergonomic($ergonomic);
 
             $manager->persist($roomergonomics);
         }
-
         $manager->flush();
     }
 
