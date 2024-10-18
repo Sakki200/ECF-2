@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block javascript %}
+	<script src="{{asset('js/notifications.js')}}" type="text/javascript"></script>
 	<script src="{{asset('js/reservationForm.js')}}" type="text/javascript"></script>
 	{% block importmap %}
 		{{ importmap('app') }}

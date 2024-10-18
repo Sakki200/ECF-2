@@ -34,7 +34,7 @@ class ReservationFixtures extends Fixture implements DependentFixtureInterface
                 $reservation
                     ->setStart($setHour)
                     ->setEndReservation($setHour + $faker->numberBetween(1, 4))
-                    ->setValidated(false)
+                    ->setValidated("pending")
                     ->setDateReservation($dateTime->setTime(0, 0, 0))
                     ->setUser($this->getReference('user_' . $faker->numberBetween(0, 29)))
                     ->setRoom($room)
