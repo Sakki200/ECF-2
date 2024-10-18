@@ -1,61 +1,71 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Login
+{% endblock %}
 
 {% block body %}
-    <main class="h-max flex flex-col items-center justify-center bg-gradient-to-r from-violet-100 via-slate-100 to-indigo-100 py-5 md:py-16">
-        {% if error %}
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                <span class="block sm:inline">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
-            </div>
-        {% endif %}
-        {% if app.user %}
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
-                {{'Vous êtes connecté en tant que'|trans}} {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" class="font-bold">{{"Logout"|trans }}</a>
-            </div>
-        {% endif %}
-        <header class="text-center mb-4">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ 'Bon Retour'|trans }}</h1>
-            <p class="text-slate-600 mb-4">
-                {{ "Connecte toi pour reservez"|trans }}.
-            </p>
-        </header>
+	{% if app.user %}
+		<h2>Vous êtes déjà authentifié</h2>
+		<h3>{{ app.user.userIdentifier }} <br>
+		Would you like to</h3>
+		<a href="{{ path('app_logout') }}">Logout ?</a>
+	{% else %}
+		<main class="h-max flex flex-col items-center justify-center bg-gradient-to-r from-violet-100 via-slate-100 to-indigo-100 py-5 md:py-16">
+			{% if error %}
+				<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+					<span class="block sm:inline">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+				</div>
+			{% endif %}
+			{% if app.user %}
+				<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+					{{'Vous êtes connecté en tant que'|trans}}
+					{{ app.user.userIdentifier }},
+					<a href="{{ path('app_logout') }}" class="font-bold">{{"Logout"|trans }}</a>
+				</div>
+			{% endif %}
+			<header class="text-center mb-4">
+				<h1 class="text-4xl md:text-5xl font-bold mb-4">{{ 'Bon Retour'|trans }}</h1>
+				<p class="text-slate-600 mb-4">
+					{{ "Connecte toi pour reservez"|trans }}.
+				</p>
+			</header>
 
-           <div class="my-10 p-4 rounded-md shadow-md bg-slate-50 min-w-80">
-        <form method="post" action="{{ path('app_login') }}">
-            <div class="mb-4">
-                <label for="username" class="block font-medium text-gray-700 mb-2">
-                    {{ "Adresse e-mail"|trans }}
-                </label>
-                <input type="email" value="{{ last_username }}" name="_username" id="username" class="border-2 border-violet-950 rounded-md p-2 w-full focus:border-violet-600" autocomplete="email" required autofocus>
-            </div>
+			<div class="my-10 p-4 rounded-md shadow-md bg-slate-50 min-w-80">
+				<form method="post" action="{{ path('app_login') }}">
+					<div class="mb-4">
+						<label for="username" class="block font-medium text-gray-700 mb-2">
+							{{ "Adresse e-mail"|trans }}
+						</label>
+						<input type="email" value="{{ last_username }}" name="_username" id="username" class="border-2 border-violet-950 rounded-md p-2 w-full focus:border-violet-600" autocomplete="email" required autofocus>
+					</div>
 
-            <div class="mb-4">
-                <label for="password" class="block font-medium text-gray-700 mb-2">
-                    {{ "Saisissez votre mot de passe"|trans }}
-                </label>
-                <input type="password" name="_password" id="password" class="border-2 border-violet-950 rounded-md p-2 w-full focus:border-violet-600" autocomplete="current-password" required>
-            </div>
+					<div class="mb-4">
+						<label for="password" class="block font-medium text-gray-700 mb-2">
+							{{ "Saisissez votre mot de passe"|trans }}
+						</label>
+						<input type="password" name="_password" id="password" class="border-2 border-violet-950 rounded-md p-2 w-full focus:border-violet-600" autocomplete="current-password" required>
+					</div>
 
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            <div class="flex flex-col gap-2 items-center justify-between mb-4">
-                <div class="flex items-center">
-                    <input type="checkbox" name="_remember_me" id="_remember_me" class="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 rounded">
-                    <l abel for="_remember_me" class="ml-2 block text-sm text-gray-900">{{"Se souvenir de moi"|trans }}</l>
-                </div>
-                <div class="text-sm">
-                    <a href="#" class="font-medium text-violet-600 hover:text-violet-500">{{"Mot de passe oublié ?"|trans }}</a>
-                </div>
-            </div>
+					<div class="flex flex-col gap-2 items-center justify-between mb-4">
+						<div class="flex items-center">
+							<input type="checkbox" name="_remember_me" id="_remember_me" class="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 rounded">
+							<l abel for="_remember_me" class="ml-2 block text-sm text-gray-900">{{"Se souvenir de moi"|trans }}</l>
+						</div>
+						<div class="text-sm">
+							<a href="#" class="font-medium text-violet-600 hover:text-violet-500">{{"Mot de passe oublié ?"|trans }}</a>
+						</div>
+					</div>
 
-            <button type="submit" class="bg-violet-600 p-2 flex items-center gap-2 rounded-md mt-4 w-full justify-center text-white hover:bg-violet-700">
-                {{ "Se connecter"|trans }}
-            </button>
-        </form>
-    </div>
-    <p  class="text-center text-slate-600 mb-4 text-sm pb-48">{{"Vous n'avez pas de compte ?"|trans }}
-        <a  href="{{ path('app_register') }}" class="text-violet-600 hover:text-violet-800">{{"Inscrivez-vous maintenant"|trans }}</a>
-    </p>
-</main>
+					<button type="submit" class="bg-violet-600 p-2 flex items-center gap-2 rounded-md mt-4 w-full justify-center text-white hover:bg-violet-700">
+						{{ "Se connecter"|trans }}
+					</button>
+				</form>
+			</div>
+			<p class="text-center text-slate-600 mb-4 text-sm pb-48">{{"Vous n'avez pas de compte ?"|trans }}
+				<a href="{{ path('app_register') }}" class="text-violet-600 hover:text-violet-800">{{"Inscrivez-vous maintenant"|trans }}</a>
+			</p>
+		</main>
+	{% endif %}
 {% endblock %}

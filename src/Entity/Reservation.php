@@ -22,7 +22,7 @@ class Reservation
     private ?int $end_reservation = null;
 
     #[ORM\Column]
-    private ?bool $is_validated = null;
+    private ?string $is_validated = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_reservation = null;
@@ -38,6 +38,11 @@ class Reservation
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     private ?Room $room = null;
+
+    public function __construct()
+    {
+        $this->is_validated = "pending";
+    }
 
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
@@ -81,12 +86,12 @@ class Reservation
         return $this;
     }
 
-    public function isValidated(): ?bool
+    public function isValidated(): ?string
     {
         return $this->is_validated;
     }
 
-    public function setValidated(bool $is_validated): static
+    public function setValidated(string $is_validated): static
     {
         $this->is_validated = $is_validated;
 

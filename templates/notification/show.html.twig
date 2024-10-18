@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation -
+{% endblock %}
+{% block body %}
+	{% if 'ROLE_ADMIN' in app.user.roles %}
+		<h1 class="text-center font-semibold text-3xl mt-8">Gestion des demandes de réservations</h1>
+		<h2 class="text-center font-medium text-2xl mt-2">
+			Bonjour
+			{{app.user.username|capitalize}}, il vous reste
+			{{reservationsPending |length}}
+			à traiter
+		</h2>
+		<div>
+			<div class="flex flex-col item-center justify-center">
+				{% for pending in reservationsPending %}
+					<div class="mb-8">
+						<p>{{pending.room.name}}</p>
+						<p>{{pending.user.username}}</p>
+						<p>Le
+							{{pending.dateReservation|date('d-m-Y')}}</p>
+						<p>De
+							{{pending.start}}h à
+							{{pending.endReservation}}h</p>
+						<p>Demande de réservation faite le
+							{{pending.createdAt|date('d-m-Y')}}</p>
+
+						{% set break1 = false %}
+						{% for valid in reservationsValidated %}
+
+							{% set roomTime = 0 %}
+							{% if valid.room.name == pending.room.name and not break1   %}
+								{% for room in allRooms %}
+									{% if room.name == valid.room.name %}
+										{% for reservation in room.reservations %}
+											{% if reservation.dateReservation == pending.dateReservation and reservation.isValidated == "validated" %}
+												{% set roomTime = roomTime + 1 %}
+											{% endif %}
+										{% endfor %}
+									{% endif %}
+								{% endfor %}
+								<p>Vous avez
+									{{roomTime}}
+									réservation pour la salle
+									{{pending.room.name|replace({(pending.room.name|capitalize|first): (pending.room.name|first|lower)})}}
+									aujourd'hui.
+								</p>
+								{% set break1 = true %}
+							{% endif %}
+						{% endfor %}
+						<div class="m-auto flex gap-4">
+							<form action="{{path('app_notification_validation', {'id': pending.id})}}">
+								<button type="submit" class="bg-green-500 text-white py-1 px-2">Valider</button>
+							</form>
+							<form action="{{path('app_notification_refuse', {'id': pending.id})}}">
+								<button type="submit" class="bg-red-500 text-white py-1 px-2">Refuser</button>
+							</form>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+
+	{% else %}
+		<h1>Vous vous êtes perdu ?</h1>
+	{% endif %}
+{% endblock %}

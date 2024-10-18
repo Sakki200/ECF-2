@@ -36,8 +36,7 @@ class ReservationController extends AbstractController
                     array_push($timesTaken, $number);
                 }
             }
-        }
-
+        }        
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation, [
             'disabled_hours' => $timesTaken ?? [],
