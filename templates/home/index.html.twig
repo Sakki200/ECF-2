@@ -1,20 +1,209 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home - {% endblock %}
+{% block title %}Accueil -
+{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block stylesheets %}
+	{{ parent() }}
+	<style>:root
+	{
+		--couleur-primaire: #34495e; /* Bleu foncé légèrement vif */
+		--couleur-secondaire: #f4e1d2; /* Beige doux */
+		--couleur-fond: #f7f3f0; /* Gris clair chaud */
+		--couleur-texte: #2c3e50; /* Gris anthracite */
+		--couleur-blanc: #ffffff;
+	}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	body {
+		font-family: 'Poppins', sans-serif;
+		margin: 0;
+		padding: 0;
+		background-color: var(--couleur-fond);
+		color: var(--couleur-texte);
+		line-height: 1.6;
+	}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/nilki/Desktop/COURS PREPAVENIR/ECF 2/ecf_2/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/nilki/Desktop/COURS PREPAVENIR/ECF 2/ecf_2/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+	.conteneur {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 20px;
+	}
+
+	.barre-navigation {
+		background-color: var(--couleur-blanc);
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		position: fixed;
+		width: 100%;
+		top: 0;
+		z-index: 1000;
+	}
+
+	.contenu-navigation {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 15px 0;
+	}
+
+	.logo img {
+		width: 120px;
+		height: auto;
+	}
+
+	.boutons-authentification {
+		display: flex;
+		gap: 15px;
+	}
+
+	.bouton {
+		padding: 10px 20px;
+		border: none;
+		border-radius: 25px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		font-weight: 600;
+		text-decoration: none;
+		display: inline-block;
+	}
+
+	.bouton-primaire {
+		background-color: var(--couleur-primaire);
+		color: var(--couleur-blanc);
+	}
+
+	.bouton-secondaire {
+		background-color: var(--couleur-secondaire);
+		color: var(--couleur-texte);
+	}
+
+	.bouton:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.banniere {
+		background: linear-gradient(135deg, var(--couleur-primaire), var(--couleur-secondaire));
+		color: var(--couleur-blanc);
+		text-align: center;
+		padding: 150px 0 100px;
+		margin-top: 60px;
+		position: relative;
+	}
+
+	.banniere svg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 0;
+		opacity: 0.3; /* Transparence de l'image SVG */
+	}
+
+	.banniere-content {
+		position: relative;
+		z-index: 1;
+	}
+
+	.banniere h1 {
+		font-size: 3.5em;
+		margin-bottom: 20px;
+		font-weight: 600;
+	}
+
+	.banniere p {
+		font-size: 1.2em;
+		margin-bottom: 30px;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.fonctionnalites {
+		padding: 80px 0;
+	}
+
+	.grille-fonctionnalites {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 30px;
+	}
+
+	.fonctionnalite {
+		background-color: var(--couleur-blanc);
+		border-radius: 8px;
+		padding: 30px;
+		text-align: center;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.fonctionnalite:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+	}
+
+	.fonctionnalite h2 {
+		color: var(--couleur-primaire);
+		margin-bottom: 15px;
+	}
+
+	.appel-action {
+		background-color: var(--couleur-primaire);
+		color: var(--couleur-blanc);
+		text-align: center;
+		padding: 80px 0;
+	}
+
+	.appel-action h2 {
+		font-size: 2.5em;
+		margin-bottom: 30px;
+	}
+
+	@media(max-width: 768px) {
+		.banniere h1 {
+			font-size: 2.5em;
+		}
+
+		.grille-fonctionnalites {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>{% endblock %}{% block body %}
+<header class="banniere">
+	<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1440 320">
+		<path fill="#ffffff" fill-opacity="1" d="M0,64L40,74.7C80,85,160,107,240,117.3C320,128,400,128,480,144C560,160,640,192,720,192C800,192,880,160,960,154.7C1040,149,1120,171,1200,181.3C1280,192,1360,192,1400,192L1440,192L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
+	</svg>
+	<div class="conteneur banniere-content">
+		<h1>Réservez votre espace idéal</h1>
+		<p>Trouvez et réservez la salle parfaite pour vos réunions, événements et sessions de travail</p>
+		<a href="{{path('app_rooms_all')}}" class="bouton bouton-secondaire">Découvrir nos salles</a>
+	</div>
+</header>
+
+<section class="fonctionnalites">
+	<div class="conteneur">
+		<div class="grille-fonctionnalites">
+			<div class="fonctionnalite">
+				<h2>Réservation Facile</h2>
+				<p>Réservez votre salle en quelques clics, 24h/24 et 7j/7.</p>
+			</div>
+			<div class="fonctionnalite">
+				<h2>Espaces Variés</h2>
+				<p>Du bureau individuel à la salle de conférence, trouvez l'espace adapté à vos besoins.</p>
+			</div>
+			<div class="fonctionnalite">
+				<h2>Équipement Moderne</h2>
+				<p>Toutes nos salles sont équipées des dernières technologies pour faciliter votre travail.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="appel-action">
+	<div class="conteneur">
+		<h2>Prêt à booster votre productivité ?</h2>
+		<a href="{{path('app_rooms_all')}}" class="bouton bouton-secondaire">Réserver maintenant</a>
+	</div>
+</section>
 {% endblock %}
