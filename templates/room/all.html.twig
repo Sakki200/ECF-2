@@ -61,24 +61,6 @@
 										<span class="text-blue-600">Salle principale</span>
 									{% endif %}
 								</p>
-								<div class="mt-4">
-									<h3 class="font-semibold mb-2">Équipements:</h3>
-									<ul class="list-disc list-inside">
-										{% for roomEquipment in room.roomEquipment %}
-											<li>{{ roomEquipment.equipment.name }}
-												(Quantité:
-												{{ roomEquipment.quantity }})</li>
-										{% endfor %}
-									</ul>
-								</div>
-								<div class="mt-4">
-									<h3 class="font-semibold mb-2">Ergonomie:</h3>
-									<ul class="list-disc list-inside">
-										{% for roomErgonomic in room.roomErgonomics %}
-											<li>{{ roomErgonomic.ergonomic.name }}</li>
-										{% endfor %}
-									</ul>
-								</div>
 							</div>
 						</a>
 					</div>
