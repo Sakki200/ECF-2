@@ -8,6 +8,7 @@ use Faker\Factory;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class EquipmentFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -16,9 +17,6 @@ class EquipmentFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
-
-        $equipment = new Equipment;
-        $roomEquipments = new RoomEquipment;
 
         $equipmentOptions = [
             'Cable RJ45/Ethernet',
@@ -62,28 +60,33 @@ class EquipmentFixtures extends Fixture implements DependentFixtureInterface
         ];
 
         foreach ($equipmentOptions as $option) {
-            $equipment->setName($option);
-            $equipment->setSoftware(false);
+            $equipment = new Equipment;
+            $equipment
+                ->setName($option)
+                ->setSoftware(false);
             $manager->persist($equipment);
-            $manager->flush();
+        }
+        foreach ($softwareOptions as $option) {
+            $equipment = new Equipment;
+            $equipment
+                ->setName($option)
+                ->setSoftware(true);
+            $manager->persist($equipment);
         }
 
-        foreach ($softwareOptions as $option) {
-            $equipment->setName($option);
-            $equipment->setSoftware(true);
-            $manager->persist($equipment);
-            $manager->flush();
-        }
+        $manager->flush();
 
         for ($i = 0; $i < $faker->numberBetween(70, 90); $i++) {
+            $roomEquipments = new RoomEquipment;
             $room = $this->getReference('room_' . $faker->numberBetween(0, 19));
-            $roomEquipments->setRoom($room);
-            $roomEquipments->setEquipment($equipment);
-            $roomEquipments->setQuantity($faker->numberBetween(1, 5));
+            $roomEquipments
+                ->setRoom($room)
+                ->setEquipment($equipment)
+                ->setQuantity($faker->numberBetween(1, 5));
 
             $manager->persist($roomEquipments);
-            $manager->flush();
         }
+        $manager->flush();
     }
 
 
