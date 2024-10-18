@@ -7,7 +7,7 @@
 						<a href="{{path('app_home')}}" class="text-gray-800 font-bold text-2xl">
 							Room1O1
 						</a>
-						<a href="#" class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-lg font-medium">
+						<a href="{{path('app_rooms_all')}}" class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-lg font-medium">
 							Réservez une de nos salles
 						</a>
 					</div>
@@ -54,10 +54,15 @@
 					{% endif %}
 					<div class="ml-3 relative flex justify-center items-center">
 						<div>
-							<a href="#">
+							<a href="{{path('app_profile')}}">
 								<button class="bg-white rounded-full flex justify-center items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" id="user-menu" aria-haspopup="true">
-									<span class="sr-only">Open user menu</span>
-									<img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+									{% if app.user.image %}
+										<img class="h-8 w-8 rounded-full" src="{{ asset('images/' ~ app.user.image) }}" alt="">
+
+									{% else %}
+										<img class="h-8 w-8 rounded-full" src="{{ asset('images/man-user-color-icon.svg') }}" alt="">
+
+									{% endif %}
 								</button>
 							</a>
 						</div>

@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-// #[IsGranted('IS_AUTHENTICATED_FULLY')]
+#[IsGranted('IS_AUTHENTICATED_FULLY')]
 class ReservationController extends AbstractController
 {
     #[Route('/reservation/{id}', name: 'app_reservation_verif', methods: ['GET', 'POST'])]
@@ -36,7 +36,7 @@ class ReservationController extends AbstractController
                     array_push($timesTaken, $number);
                 }
             }
-        }        
+        }
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation, [
             'disabled_hours' => $timesTaken ?? [],
@@ -62,7 +62,7 @@ class ReservationController extends AbstractController
                 if (in_array($time, $timesTaken)) { // Si un conflit est détecté
                     $interrupt = true; // On marque qu'il y a un conflit
                     break; // Sortir des deux boucles (éviter des calculs inutiles)
-            }
+                }
 
                 // Si un conflit de réservation est détecté
                 if ($interrupt === true) {
@@ -72,7 +72,7 @@ class ReservationController extends AbstractController
                     $reservation
                         ->setUser($user)
                         ->setRoom($room)
-                        ->setValidated(false);
+                        ->setValidated("pending");
 
                     $em->persist($reservation);
                     $em->flush();
