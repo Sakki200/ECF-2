@@ -1,94 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Votre profile -
-{% endblock %}
+{% block title %}Votre profil - {% endblock %}
 
 {% block javascript %}
-	<script src="{{asset('js/notifications.js')}}" type="text/javascript"></script>
-	<script src="{{asset('js/uploadImage.js')}}" type="text/javascript"></script>
-	{% block importmap %}
-		{{ importmap('app') }}
-	{% endblock %}
+    <script src="{{ asset('js/notifications.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/uploadImage.js') }}" type="text/javascript"></script>
+    {% block importmap %}
+        {{ importmap('app') }}
+    {% endblock %}
 {% endblock %}
 
 {% block body %}
-	{% if app.user.image %}
-		<img class="rounded-full w-32 h-32 mx-auto mt-8" src="{{ asset('images/' ~ app.user.image) }}" alt="User profile picture">
-	{% else %}
-		<img class="rounded-full w-32 h-32 mx-auto mt-8" src="{{ asset('images/man-user-color-icon.svg') }}" alt="User profile picture">
+    <div class="container px-4 py-8 mx-auto">
+        <div class="mb-8 text-center">
+            {% if app.user.image %}
+                <img class="w-32 h-32 mx-auto mb-4 rounded-full" src="{{ asset('images/' ~ app.user.image) }}" alt="User profile picture">
+            {% else %}
+                <img class="w-32 h-32 mx-auto mb-4 rounded-full" src="{{ asset('images/man-user-color-icon.svg') }}" alt="User profile picture">
+            {% endif %}
+            <form id="profile-img-form" class="flex justify-center" action="{{ path('app_profile_img') }}" method="post" enctype="multipart/form-data" onsubmit="return false;">
+                <button id="upload-btn" class="font-semibold text-blue-500 transition-colors hover:text-blue-600">
+                    Modifier
+                </button>
+                <input id="file" type="file" class="hidden" name="file" accept="image/*">
+            </form>
+        </div>
 
-	{% endif %}
-	<form id="profile-img-form" class="flex justify-center mb-8" action="{{path('app_profile_img')}}" method="post" enctype="multipart/form-data" onsubmit="return false;">
-		<button id="upload-btn" class="text-blue-400 font-semibold hover:text-blue-300">
-			Modifier
-		</button>
-		<input id="file" type="file" class="hidden" name="file" accept=" image/*">
-	</form>
+        <div class="grid grid-cols-1 gap-8 mb-12 md:grid-cols-3">
+            {% for section in [
+                {title: 'Vos réservations validées', status: 'validated'},
+                {title: 'Vos réservations en attente', status: 'pending'},
+                {title: 'Vos réservations refusées', status: 'refused'}
+            ] %}
+                <div>
+                    <h2 class="mb-4 text-2xl font-semibold text-center">{{ section.title }}</h2>
+                    <div class="space-y-4">
+                        {% for item in userReservation %}
+                            {% if currentDate < item.dateReservation and item.isValidated == section.status %}
+                                <div class="p-4 bg-white rounded-lg shadow-md">
+                                    <h3 class="mb-2 text-lg font-semibold">{{ item.room.name }}</h3>
+                                    <p class="text-gray-600">Le {{ item.dateReservation|date('d-m-Y') }}</p>
+                                    <p class="text-gray-600">De {{ item.start }}h à {{ item.endReservation }}h</p>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
 
-	<article class="grid grid-cols-3 w-3/4 m-auto">
-		<section>
-			<h2 class="text-center font-semibold text-2xl">Vos réservations validées</h2>
-			{% for item in userReservation %}
-				{% if currentDate < item.dateReservation %}
-					{% if item.isValidated == "validated" %}
-						<p>{{item.room.name}}</p>
-						<p>Le
-							{{item.dateReservation|date('d-m-Y')}}</p>
-						<p>De
-							{{item.start}}h à
-							{{item.endReservation}}h</p>
-					{% endif %}
-				{% endif %}
-			{% endfor %}
-		</section>
-		<section>
-			<h2 class="text-center font-semibold text-2xl">Vos réservations en attentes</h2>
-			{% for item in userReservation %}
-				{% if currentDate < item.dateReservation %}
-					{% if item.isValidated == "pending" %}
-						<p>{{item.room.name}}</p>
-						<p>Le
-							{{item.dateReservation|date('d-m-Y')}}</p>
-						<p>De
-							{{item.start}}h à
-							{{item.endReservation}}h</p>
-					{% endif %}
-				{% endif %}
-			{% endfor %}
-		</section>
-		<section>
-			<h2 class="text-center font-semibold text-2xl">Vos réservations en refusées</h2>
-			{% for item in userReservation %}
-				{% if currentDate < item.dateReservation %}
-					{% if item.isValidated == "refused" %}
-						<p>{{item.room.name}}</p>
-						<p>Le
-							{{item.dateReservation|date('d-m-Y')}}</p>
-						<p>De
-							{{item.start}}h à
-							{{item.endReservation}}h</p>
-					{% endif %}
-				{% endif %}
-			{% endfor %}
-		</section>
-	</article>
-	<article>
-		<h2 class="text-center font-semibold text-2xl">Vos précédentes réservations</h2>
-		<section class="grid grid-cols-5">
-			{% for item in userReservation %}
-				<div>
-					{% if currentDate > item.dateReservation %}
-						<p>{{item.room.name}}</p>
-						<p>Statut :
-							{{item.isValidated}}</p>
-						<p>Le
-							{{item.dateReservation|date('d-m-Y')}}</p>
-						<p>De
-							{{item.start}}h à
-							{{item.endReservation}}h</p>
-					{% endif %}
-				</div>
-			{% endfor %}
-		</section>
-	</article>
+        <div class="mt-12">
+            <h2 class="mb-6 text-2xl font-semibold text-center">Vos précédentes réservations</h2>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                {% for item in userReservation %}
+                    {% if currentDate > item.dateReservation %}
+                        <div class="p-4 bg-white rounded-lg shadow-md">
+                            <h3 class="mb-2 text-lg font-semibold">{{ item.room.name }}</h3>
+                            <p class="text-gray-600">Statut : {{ item.isValidated }}</p>
+                            <p class="text-gray-600">Le {{ item.dateReservation|date('d-m-Y') }}</p>
+                            <p class="text-gray-600">De {{ item.start }}h à {{ item.endReservation }}h</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
