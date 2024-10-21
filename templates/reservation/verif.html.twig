@@ -1,17 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Réservation -
+{% block title %}Réservation
 {% endblock %}
 
 {% block javascript %}
-	<script src="{{asset('js/notifications.js')}}" type="text/javascript"></script>
-	<script src="{{asset('js/reservationForm.js')}}" type="text/javascript"></script>
+	<script src="{{ asset('js/notifications.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/reservationForm.js') }}" type="text/javascript"></script>
 	{% block importmap %}
 		{{ importmap('app') }}
 	{% endblock %}
 {% endblock %}
 
 {% block body %}
-	<h1>Vous souhaitez réservé notre
-		{{room.name|replace({(room.name|capitalize|first): (room.name|first|lower)})}}?</h1>
-	{{form(formReservation)}}{% endblock %}
+	<div class="bg-white shadow-lg rounded-lg p-8">
+		<h1 class="text-2xl font-bold mb-4">
+			Vous souhaitez réserver notre
+			<span class="text-primary-500">{{ room.name|replace({(room.name|capitalize|first): (room.name|first|lower)}) }}</span>
+			?
+		</h1>
+		<div class="mt-6 grid grid-cols-2 gap-4">
+			<div>
+				<p class="font-bold">Capacité :
+					{{ room.capacity }}</p>
+				<p class="font-bold">Étage :
+					{{ room.floor }}</p>
+				<p class="font-bold">Numéro de porte :
+					{{ room.doorNumber }}</p>
+				<div class="mt-4">
+					<h3 class="font-semibold mb-2">Équipements:</h3>
+					<ul class="list-disc list-inside">
+						{% for roomEquipment in room.roomEquipment %}
+							<li>{{ roomEquipment.equipment.name }}
+								(Quantité:
+								{{ roomEquipment.quantity }})</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="mt-4">
+					<h3 class="font-semibold mb-2">Ergonomie:</h3>
+					<ul class="list-disc list-inside">
+						{% for roomErgonomic in room.roomErgonomics %}
+							<li>{{ roomErgonomic.ergonomic.name }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<div>
+				{% if room.image %}
+					<img src="{{ asset('images/' ~ room.image) }}" alt="{{ room.name }}" class="w-full rounded-lg">
+				{% else %}
+					<p class="text-gray-500">Aucune image disponible</p>
+				{% endif %}
+			</div>
+		</div>
+		<div class="flex justify-center items-center mt-6">
+			<div class="w-full max-w-screen-xl bg-white p-8 rounded-lg shadow-md">
+				{{ form(formReservation) }}
+				</div>
+			</div>
+		</div>
+	{% endblock %}
