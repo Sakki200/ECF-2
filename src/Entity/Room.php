@@ -31,7 +31,7 @@ class Room
     private ?string $image = null;
 
     #[ORM\Column]
-    private ?bool $is_backup = null;
+    public ?bool $is_backup = null;
 
     /**
      * @var Collection<int, Reservation>
@@ -123,7 +123,7 @@ class Room
         return $this;
     }
 
-    public function isBackup(): ?bool
+    public function getBackup($value = null): ?bool
     {
         return $this->is_backup;
     }

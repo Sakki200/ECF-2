@@ -25,7 +25,7 @@ class Equipment
     private Collection $room_equipments;
 
     #[ORM\Column]
-    private ?bool $isSoftware = null;
+    public ?bool $isSoftware = null;
 
     public function __construct()
     {
@@ -79,7 +79,7 @@ class Equipment
         return $this;
     }
 
-    public function isSoftware(): ?bool
+    public function getSoftware($value = null): ?bool
     {
         return $this->isSoftware;
     }

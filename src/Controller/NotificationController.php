@@ -18,8 +18,8 @@ class NotificationController extends AbstractController
     #[Route('/notification', name: 'app_notification')]
     public function show(ReservationRepository $res, RoomRepository $rr): Response
     {
-        $reservationsPending = $res->findBy(['is_validated' => "pending"], ['updated_at' => 'DESC']);
-        $reservationsValidated = $res->findBy(['is_validated' => "validated"]);
+        $reservationsPending = $res->findBy(['validated' => "pending"], ['updated_at' => 'DESC']);
+        $reservationsValidated = $res->findBy(['validated' => "validated"]);
 
         return $this->render('notification/show.html.twig', [
             'reservationsPending' => $reservationsPending,
