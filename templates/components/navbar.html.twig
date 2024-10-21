@@ -26,11 +26,11 @@
 								{% set reservationsPending = app.request.attributes.get('reservationsPending') %}
 								{% set lastReservations = app.request.attributes.get('lastReservations') %}
 								<p>{{reservationsPending |length}}</p>
-								<div id="navNotificationHover" class="origin-top-right absolute right-0 top-5 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 z-10 hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-									<div class="flex flex-col item-center justify-center">
+								<div id="navNotificationHover" class="origin-top-right absolute flex flex-col items-center right-0 top-7 mt-2 w-48 rounded-md shadow-lg p-2 bg-white ring-1 ring-black ring-opacity-5 z-10 hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+									<div class="flex flex-col item-center justify-center mt-2">
 										{% for item in lastReservations %}
-											<div>
-												<p>{{item.room.name}}</p>
+											<div class="mb-4">
+												<a href="{{path('app_room_show', {'id' : item.room.id})}}" class="text-teal-600 font-semibold hover:text-teal-500">{{item.room.name}}</a>
 												<p>{{item.user.username}}</p>
 												<p>Le
 													{{item.dateReservation|date('d-m-Y')}}</p>
@@ -39,10 +39,10 @@
 													{{item.endReservation}}h</p>
 												<div class="m-auto flex gap-4">
 													<form action="{{path('app_notification_validation', {'id': item.id})}}">
-														<button type="submit" class="bg-green-500 text-white py-1 px-2">Valider</button>
+														<button type="submit" class="bg-emerald-500 text-white py-1 px-2 rounded-md hover:bg-emerald-400">Valider</button>
 													</form>
 													<form action="{{path('app_notification_refuse', {'id': item.id})}}">
-														<button type="submit" class="bg-red-500 text-white py-1 px-2">Refuser</button>
+														<button type="submit" class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-400">Refuser</button>
 													</form>
 												</div>
 											</div>

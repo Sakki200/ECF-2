@@ -29,7 +29,7 @@ class UserFixtures extends Fixture
         for ($i = 0; $i < 30; $i++) {
             $user = new User;
             $user
-                ->setUsername($faker->userName)
+                ->setUsername($faker->lastName())
                 ->setEmail($faker->email)
                 ->setPassword($this->hasher->hashPassword($user, 'password'))
                 ->setRoles(['ROLE_USER']);

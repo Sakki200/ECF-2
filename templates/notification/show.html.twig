@@ -37,7 +37,7 @@
                                     <p class="mb-4 text-gray-600">
                                         Vous avez {{ roomTime }} réservation(s) pour la salle
                                         {{ pending.room.name|replace({(pending.room.name|capitalize|first): (pending.room.name|first|lower)}) }}
-                                        aujourd'hui.
+                                        ce jour.
                                     </p>
                                     {% set break1 = true %}
                                 {% endif %}
@@ -45,7 +45,7 @@
 
                             <div class="flex justify-between">
                                 <form action="{{ path('app_notification_validation', {'id': pending.id}) }}">
-                                    <button type="submit" class="px-4 py-2 text-white transition-colors bg-green-500 rounded hover:bg-green-600">Valider</button>
+                                    <button type="submit" class="px-4 py-2 text-white transition-colors bg-emerald-500 rounded hover:bg-emerald-600">Valider</button>
                                 </form>
                                 <form action="{{ path('app_notification_refuse', {'id': pending.id}) }}">
                                     <button type="submit" class="px-4 py-2 text-white transition-colors bg-red-500 rounded hover:bg-red-600">Refuser</button>
