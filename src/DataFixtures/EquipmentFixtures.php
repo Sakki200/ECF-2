@@ -58,12 +58,14 @@ class EquipmentFixtures extends Fixture implements DependentFixtureInterface
             'Adobe Lightroom',
             'Visual Studio Code'
         ];
+        $arrayEquipments = [];
 
         foreach ($equipmentOptions as $option) {
             $equipment = new Equipment;
             $equipment
                 ->setName($option)
                 ->setSoftware(false);
+            array_push($arrayEquipments, $equipment);
             $manager->persist($equipment);
         }
         foreach ($softwareOptions as $option) {
@@ -71,6 +73,7 @@ class EquipmentFixtures extends Fixture implements DependentFixtureInterface
             $equipment
                 ->setName($option)
                 ->setSoftware(true);
+            array_push($arrayEquipments, $equipment);
             $manager->persist($equipment);
         }
 
@@ -81,7 +84,7 @@ class EquipmentFixtures extends Fixture implements DependentFixtureInterface
             $room = $this->getReference('room_' . $faker->numberBetween(0, 19));
             $roomEquipments
                 ->setRoom($room)
-                ->setEquipment($equipment)
+                ->setEquipment($faker->randomElement($arrayEquipments))
                 ->setQuantity($faker->numberBetween(1, 5));
 
             $manager->persist($roomEquipments);

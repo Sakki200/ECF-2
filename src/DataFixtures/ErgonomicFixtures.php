@@ -29,9 +29,12 @@ class ErgonomicFixtures extends Fixture implements DependentFixtureInterface
             'VMC'
         ];
 
+        $arrayErgonomics = [];
+
         foreach ($ergonomicOptions as $option) {
             $ergonomic = new Ergonomic;
             $ergonomic->setName($option);
+            array_push($arrayErgonomics, $ergonomic);
             $manager->persist($ergonomic);
         }
         $manager->flush();
@@ -41,7 +44,7 @@ class ErgonomicFixtures extends Fixture implements DependentFixtureInterface
             $room = $this->getReference('room_' . $faker->numberBetween(0, 19));
             $roomergonomics
                 ->setRoom($room)
-                ->setergonomic($ergonomic);
+                ->setergonomic($faker->randomElement($arrayErgonomics));
 
             $manager->persist($roomergonomics);
         }
