@@ -37,6 +37,7 @@ class NotificationController extends AbstractController
         $notification = new Notification;
         $notification
             ->setUser($user)
+            ->setReservation($reservation)
             ->setContent("La réservation n°" . $reservation->getId() . " a été validé par " . $user->getUsername() . " pour la salle " . $reservation->getRoom()->getName())
         ;
         $em->persist($notification);
@@ -55,6 +56,7 @@ class NotificationController extends AbstractController
         $notification = new Notification;
         $notification
             ->setUser($user)
+            ->setReservation($reservation)
             ->setContent("La réservation n°" . $reservation->getId() . " a été refusé par " . $user->getUsername() . " pour la salle " . $reservation->getRoom()->getName())
         ;
 
