@@ -28,7 +28,7 @@
                                     {% for room in allRooms %}
                                         {% if room.name == valid.room.name %}
                                             {% for reservation in room.reservations %}
-                                                {% if reservation.dateReservation == pending.dateReservation and reservation.isValidated == "validated" %}
+                                                {% if reservation.dateReservation == pending.dateReservation and reservation.getValidated == "validated" %}
                                                     {% set roomTime = roomTime + 1 %}
                                                 {% endif %}
                                             {% endfor %}

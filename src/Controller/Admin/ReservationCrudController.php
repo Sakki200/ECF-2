@@ -8,11 +8,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class ReservationCrudController extends AbstractCrudController
@@ -22,7 +20,7 @@ class ReservationCrudController extends AbstractCrudController
         return Reservation::class;
     }
 
-    
+
     public function configureActions(Actions $actions): Actions
     {
         return $actions
@@ -31,7 +29,7 @@ class ReservationCrudController extends AbstractCrudController
         ;
     }
 
-    
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -45,25 +43,35 @@ class ReservationCrudController extends AbstractCrudController
     {
         return [
             IntegerField::new('id')
-            ->onlyOnDetail(),
+                ->onlyOnDetail(),
             IntegerField::new('start')
-            ->setLabel('Début')
-            ->setHelp('Choose an hour for the start of the reservation'),
+                ->setLabel('Début')
+                ->setHelp('Choose an hour for the start of the reservation'),
             IntegerField::new('end_reservation')
-            ->setLabel('Fin')
-            ->setHelp('Choose an hour for the end of the reservation'),
-            BooleanField::new('is_validated')
-            ->setLabel('Validé')
-            ->setHelp('Validate this reservation if there is Schedule conflict'),
+                ->setLabel('Fin')
+                ->setHelp('Choose an hour for the end of the reservation'),
+            ChoiceField::new('is_validated')
+                ->setLabel('Statut')
+                ->setHelp('Validate this reservation if there is no Schedule conflict')
+                ->setChoices([
+                    'En attente' => 'pending',
+                    'Validée' => 'validated',
+                    'Refusée' => 'refused'
+                ])
+                ->renderAsBadges([
+                    'pending' => 'warning',
+                    'validated' => 'success',
+                    'refused' => 'danger'
+                ]),
             DateTimeField::new('date_reservation')
-            ->setLabel('Date de réservation')
-            ->setHelp('Choose the day of the reservation'),
+                ->setLabel('Date de réservation')
+                ->setHelp('Choose the day of the reservation'),
             AssociationField::new('user')
-            ->setLabel('Utilisateur')
-            ->setHelp('Choose the User linked for this reservation'),
+                ->setLabel('Utilisateur')
+                ->setHelp('Choose the User linked for this reservation'),
             AssociationField::new('room')
-            ->setLabel('Salle')
-            ->setHelp('Choose the Room for this reservation'),
+                ->setLabel('Salle')
+                ->setHelp('Choose the Room for this reservation'),
         ];
     }
-    }
+}
