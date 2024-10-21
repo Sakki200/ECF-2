@@ -53,14 +53,14 @@
 					<li>{{ roomErgonomic.ergonomic.name }}</li>
 				{% endfor %}
 			</ul>
-    <div class="flex justify-end mt-8">
-  <a href="{{ path('app_reservation_verif', {'id': room.id}) }}" class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md shadow-sm transition duration-300 ease-in-out">
-    <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-    </svg>
-    Réserver cette Salle
-  </a>
-</div>
+			<div class="flex justify-end mt-8">
+				<a href="{{ path('app_reservation_verif', {'id': room.id}) }}" class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md shadow-sm transition duration-300 ease-in-out">
+					<svg class="h-5 w-5 mr-2" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+					</svg>
+					Réserver cette Salle
+				</a>
+			</div>
 		</div>
 	</div>
 
