@@ -44,7 +44,7 @@ class ProfileController extends AbstractController
 
             // BDD
             $user = $ur->findOneById($this->getUser());
-            if ($user->getImage() !== "" || $user->getImage() !== null) {
+            if ($user->getImage() !== null) {
                 // Supprimer l'image précédente
                 unlink($destinationPath . $user->getImage());
             }

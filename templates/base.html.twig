@@ -38,13 +38,13 @@
 		<main>
 			{% for label, messages in app.session.flashBag.all() %}
 				{% for message in messages %}
-					<div class="alert alert-{{ label }}">
+					<div class="bg-teal-700 rounded-md w-1/3 text-white m-auto text-center font-medium my-4 alert alert-{{ label }}">
 						{{ message }}
 					</div>
 				{% endfor %}
 			{% endfor %}
 			{% block body %}{% endblock %}
-		</main>
+		</main>NULL) {
 		{% include 'components/footer.html.twig' %}
 	</body>
 </html>
