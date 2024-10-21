@@ -1,0 +1,626 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Planning -
+{% endblock %}
+
+{% block javascript %}
+	<script src="{{ asset('js/planning.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/notifications.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-3xl font-semibold text-center mt-16">Planning du
+		{{date|date('d-m-Y')}}</h1>
+	<input class="block m-auto mt-8 mb-8 px-4 py-2 rounded-md" type="date" name="planning-date" id="planning-date">
+	<article class="m-auto w-3/4 mb-16">
+		<section class="grid grid-cols-12">
+			<div class="flex flex-col planningRooms">
+				<h2>Salle</h2>
+				{% for room in allRooms %}
+					{% if room.name == "Salle Neptune" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-red-500 font-semibold hover:text-red-400'>Neptune</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Orion" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-orange-500 font-semibold hover:text-orange-400'>Orion</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Titan" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-amber-500 font-semibold hover:text-amber-400'>Titan</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Andromède" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-yellow-500 font-semibold hover:text-yellow-400'>Andromède</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Vega" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-lime-500 font-semibold hover:text-lime-400'>Vega</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Cassiopée" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-green-500 font-semibold hover:text-green-400'>Cassiopée</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Sirius" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-teal-500 font-semibold hover:text-teal-400'>Sirius</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Antarès" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-emerald-500 font-semibold hover:text-emerald-400'>Antarès</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Polaris" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-cyan-500 font-semibold hover:text-cyan-400'>Polaris</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Céphée" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-sky-500 font-semibold hover:text-sky-400'>Céphée</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Lyra" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-blue-500 font-semibold hover:text-blue-400'>Lyra</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Proxima" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-indigo-500 font-semibold hover:text-indigo-400'>Proxima</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Rigel" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-violet-500 font-semibold hover:text-violet-400'>Rigel</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Alpha" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-purple-500 font-semibold hover:text-purple-400'>Alpha</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Beta" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-fuchsia-500 font-semibold hover:text-fuchsia-400'>Beta</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Galaxia" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-pink-500 font-semibold hover:text-pink-400'>Galaxia</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Cosmos" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-rose-500 font-semibold hover:text-rose-400'>Cosmos</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Nova" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-red-400 font-semibold hover:text-red-200'>Nova</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Supernova" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-pink-700 font-semibold hover:text-pink-500'>Supernova</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				{% for room in allRooms %}
+					{% if room.name == "Salle Horizon" %}
+						<div>
+							<a href='{{ path('app_room_show', {'id' : room.id}) }}' class='text-pink-900 font-semibold hover:text-pink-800'>Horizon</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+			</div>
+			{% set hours = [9,10,11,12,13,14,15,16,17,18,19] %}
+			{% for hour in hours %}
+				<div id="{{hour}}hDiv" class="flex flex-col planningTimes">
+					<h2>{{hour}}h00</h2>
+					<div class="time">
+						{% set neptuneReserv = false %}
+						{% for neptune in validatedReservations %}
+							{% if neptune.room.name == "Salle Neptune" %}
+								{% if neptune.start <= hour and neptune.endReservation > (hour - 1) %}
+									<div class="bg-red-500">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ neptune.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set neptuneReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if neptuneReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set orionReserv = false %}
+						{% for orion in validatedReservations %}
+							{% if orion.room.name == "Salle Orion" %}
+								{% if orion.start <= hour and orion.endReservation > (hour - 1) %}
+									<div class="bg-orange-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ orion.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set orionReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if orionReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set titanReserv = false %}
+						{% for titan in validatedReservations %}
+							{% if titan.room.name == "Salle Titan" %}
+								{% if titan.start <= hour and titan.endReservation > (hour - 1) %}
+									<div class="bg-amber-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ titan.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set titanReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if titanReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set andromedeReserv = false %}
+						{% for andromede in validatedReservations %}
+							{% if andromede.room.name == "Salle Andromède" %}
+								{% if andromede.start <= hour and andromede.endReservation > (hour - 1) %}
+									<div class="bg-yellow-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ andromede.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set andromedeReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if andromedeReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set vegaReserv = false %}
+						{% for vega in validatedReservations %}
+							{% if vega.room.name == "Salle Vega" %}
+								{% if vega.start <= hour and vega.endReservation > (hour - 1) %}
+									<div class="bg-lime-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ vega.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set vegaReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if vegaReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set cassiopeeReserv = false %}
+						{% for cassiopee in validatedReservations %}
+							{% if cassiopee.room.name == "Salle Cassiopée" %}
+								{% if cassiopee.start <= hour and cassiopee.endReservation > (hour - 1) %}
+									<div class="bg-green-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ cassiopee.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set cassiopeeReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if cassiopeeReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set siriusReserv = false %}
+						{% for sirius in validatedReservations %}
+							{% if sirius.room.name == "Salle Sirius" %}
+								{% if sirius.start <= hour and sirius.endReservation > (hour - 1) %}
+									<div class="bg-teal-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ sirius.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set siriusReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if siriusReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set antaresReserv = false %}
+						{% for antares in validatedReservations %}
+							{% if antares.room.name == "Salle Antarès" %}
+								{% if antares.start <= hour and antares.endReservation > (hour - 1) %}
+									<div class="bg-emerald-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ antares.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set antaresReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if antaresReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set polarisReserv = false %}
+						{% for polaris in validatedReservations %}
+							{% if polaris.room.name == "Salle Polaris" %}
+								{% if polaris.start <= hour and polaris.endReservation > (hour - 1) %}
+									<div class="bg-cyan-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ polaris.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set polarisReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if polarisReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set cepheeReserv = false %}
+						{% for cephee in validatedReservations %}
+							{% if cephee.room.name == "Salle Céphée" %}
+								{% if cephee.start <= hour and cephee.endReservation > (hour - 1) %}
+									<div class="bg-sky-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ cephee.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set cepheeReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if cepheeReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set lyraReserv = false %}
+						{% for lyra in validatedReservations %}
+							{% if lyra.room.name == "Salle Lyra" %}
+								{% if lyra.start <= hour and lyra.endReservation > (hour - 1) %}
+									<div class="bg-blue-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ lyra.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set lyraReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if lyraReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+					<div class="time">
+						{% set proximaReserv = false %}
+						{% for proxima in validatedReservations %}
+							{% if proxima.room.name == "Salle Proxima" %}
+								{% if proxima.start <= hour and proxima.endReservation > (hour - 1) %}
+									<div class="bg-indigo-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ proxima.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set proximaReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if proximaReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set rigelReserv = false %}
+						{% for rigel in validatedReservations %}
+							{% if rigel.room.name == "Salle Rigel" %}
+								{% if rigel.start <= hour and rigel.endReservation > (hour - 1) %}
+									<div class="bg-violet-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ rigel.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set rigelReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if rigelReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set alphaReserv = false %}
+						{% for alpha in validatedReservations %}
+							{% if alpha.room.name == "Salle Alpha" %}
+								{% if alpha.start <= hour and alpha.endReservation > (hour - 1) %}
+									<div class="bg-purple-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ alpha.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set alphaReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if alphaReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set betaReserv = false %}
+						{% for beta in validatedReservations %}
+							{% if beta.room.name == "Salle Beta" %}
+								{% if beta.start <= hour and beta.endReservation > (hour - 1) %}
+									<div class="bg-fuchsia-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ beta.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set betaReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if betaReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set galaxiaReserv = false %}
+						{% for galaxia in validatedReservations %}
+							{% if galaxia.room.name == "Salle Galaxia" %}
+								{% if galaxia.start <= hour and galaxia.endReservation > (hour - 1) %}
+									<div class="bg-pink-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ galaxia.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set galaxiaReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if galaxiaReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set cosmosReserv = false %}
+						{% for cosmos in validatedReservations %}
+							{% if cosmos.room.name == "Salle Cosmos" %}
+								{% if cosmos.start <= hour and cosmos.endReservation > (hour - 1) %}
+									<div class="bg-rose-500 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ cosmos.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set cosmosReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if cosmosReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set novaReserv = false %}
+						{% for nova in validatedReservations %}
+							{% if nova.room.name == "Salle Nova" %}
+								{% if nova.start <= hour and nova.endReservation > (hour - 1) %}
+									<div class="bg-red-400 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ nova.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set novaReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if novaReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set supernovaReserv = false %}
+						{% for supernova in validatedReservations %}
+							{% if supernova.room.name == "Salle Supernova" %}
+								{% if supernova.start <= hour and supernova.endReservation > (hour - 1) %}
+									<div class="bg-pink-700 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ supernova.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set supernovaReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if supernovaReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+
+					<div class="time">
+						{% set horizonReserv = false %}
+						{% for horizon in validatedReservations %}
+							{% if horizon.room.name == "Salle Horizon" %}
+								{% if horizon.start <= hour and horizon.endReservation > (hour - 1) %}
+									<div class="bg-pink-900 h-full w-full">
+										{% if 'ROLE_ADMIN' in app.user.roles %}
+											<p>
+												{{ horizon.user.username|capitalize }}</p>
+										{% else %}
+											<p>Réservé</p>
+										{% endif %}
+									</div>
+									{% set horizonReserv = true %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+						{% if horizonReserv == false %}
+							<p class="min-h-4 w-min"></p>
+						{% endif %}
+					</div>
+				</div>
+			{% endfor %}
+		</section>
+	</article>
+{% endblock %}
