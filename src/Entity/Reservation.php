@@ -22,7 +22,7 @@ class Reservation
     private ?int $end_reservation = null;
 
     #[ORM\Column]
-    private ?string $is_validated = null;
+    public ?string $is_validated = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_reservation = null;
@@ -86,7 +86,7 @@ class Reservation
         return $this;
     }
 
-    public function isValidated(): ?string
+    public function getValidated($value = null): string
     {
         return $this->is_validated;
     }

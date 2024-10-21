@@ -41,7 +41,7 @@ class EquipmentCrudController extends AbstractCrudController
             TextField::new('name')
                 ->setLabel('Name')
                 ->setHelp('Enter a Name'),
-            BooleanField::new('is_software')
+            BooleanField::new('isSoftware')
                 ->setLabel('Software')
                 ->setHelp('Check if the equipment is a software'),
         ];
