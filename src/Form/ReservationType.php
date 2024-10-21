@@ -26,7 +26,8 @@ class ReservationType extends AbstractType
                 ],
                 'label_attr' => [
                     'class' => 'block text-sm font-medium text-gray-700 mb-1' // Style de label
-                ]
+                ],
+                'help' => 'Veuillez bien entrez votre date de réservation en premier.'
             ])
             ->add('start', ChoiceType::class, [
                 'choices'  => [

@@ -1,19 +1,12 @@
 setTimeout(() => {
-  const dateInput = document.querySelector("#reservation_date_reservation");
-  const startInput = document.querySelector("#reservation_start");
-  const endInput = document.querySelector("#reservation_end_reservation");
+  const dateInput = document.querySelector("#planning-date");
   const urlParams = new URLSearchParams(window.location.search);
   const dateParams = urlParams.get("date");
 
   dateInput.setAttribute("min", new Date().toISOString().split("T")[0]);
-  startInput.disabled = true; // Active le champ
-  endInput.disabled = true;
 
   if (dateParams) {
     dateInput.value = dateParams;
-
-    startInput.disabled = false; // Active le champ
-    endInput.disabled = false; // Active le champ
   }
 
   // Active le champ optionnel si le champ requis est rempli

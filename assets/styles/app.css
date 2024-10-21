@@ -3,5 +3,39 @@
 @tailwind utilities;
 
 body {
-    background-color: rgb(237, 237, 237);
+  background-color: rgb(237, 237, 237);
+}
+
+.planningRooms {
+  & h2 {
+    text-align: center;
+    padding: 0.5rem 0rem;
+  }
+
+  & div {
+    padding: 0.5rem 0rem;
+    padding-left: 1rem;
+    border: 0.05rem solid rgb(0, 0, 0);
+  }
+}
+
+.planningTimes {
+  & h2 {
+    text-align: center;
+    padding: 0.5rem 0rem;
+  }
+
+  & .time {
+    border: 0.05rem solid rgb(0, 0, 0);
+    height: 100%;
+    width: 100%;
+    & div {
+      height: 100%;
+      width: 100%;
+    }
+    & p {
+      text-align: center;
+      padding: 0.5rem 0rem;
+    }
+  }
 }
