@@ -86,7 +86,7 @@ class ReservationType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Réserver',
                 'attr' => [
-                    'class' => 'text-white bg-teal-300 font-bold py-2 px-4 rounded hover:bg-teal-500 transition ease-in-out duration-300 mt-6',
+                    'class' => 'bg-blue-600 p-2 flex text-2xl items-center gap-2 rounded-md mt-4 w-full justify-center text-black font-bold',
                 ]
             ])
         ;
