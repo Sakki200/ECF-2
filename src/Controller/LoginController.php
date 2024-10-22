@@ -28,7 +28,8 @@ class LoginController extends AbstractController
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
-    {
+    {   
+        $this->addFlash('success', 'Vous êtes bien déconnecté.');
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

@@ -44,6 +44,8 @@ class NotificationController extends AbstractController
         $em->flush();
 
         $url = $request->headers->get('referer');
+        $this->addFlash('success', 'La réservation n°' . $reservation->getId() . ' a bien été validé.');
+
         return $this->redirect($url);
     }
     #[Route('/notification/r/{id}', name: 'app_notification_refuse')]
@@ -64,6 +66,7 @@ class NotificationController extends AbstractController
         $em->flush();
 
         $url = $request->headers->get('referer');
+        $this->addFlash('error', 'La réservation n°' . $reservation->getId() . ' a bien été refusé.');
         return $this->redirect($url);
     }
 }

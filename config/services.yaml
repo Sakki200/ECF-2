@@ -19,7 +19,13 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+
+    App\EventListener\ResponseListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
     
     App\EventListener\GlobalNotifications:
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    
+   
