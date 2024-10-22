@@ -24,7 +24,7 @@ class ReservationRepository extends ServiceEntityRepository
             ->andWhere('r.is_validated = :valid')
             ->setParameter('d', $date)
             ->setParameter('room', $room)
-            ->setParameter('valid', false)
+            ->setParameter('valid', 'validated')
             ->orderBy('r.id', 'ASC')
             ->getQuery()
             ->getResult()

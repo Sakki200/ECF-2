@@ -27,9 +27,6 @@ class ResponseListener
         // Ajouter l'en-tête X-Content-Type-Options pour éviter le mime-sniffing
         $response->headers->set('X-Content-Type-Options', 'nosniff');
 
-        // Ajouter l'en-tête Referrer-Policy pour contrôler les informations du referer
-        $response->headers->set('Referrer-Policy', 'no-referrer');
-
         // Ajouter l'en-tête X-XSS-Protection pour protéger contre les attaques XSS
         $response->headers->set('X-XSS-Protection', '1; mode=block');
     }

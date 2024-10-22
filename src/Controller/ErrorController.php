@@ -19,7 +19,7 @@ class ErrorController extends AbstractController
         $response = new Response();
         $response->setStatusCode($statusCode);
 
-        // Ajouter des headers de sécurité
+        // Ajouter des en-têtes de sécurité
         $response->headers->set('X-Frame-Options', 'DENY');
         $response->headers->set('X-Content-Type-Options', 'nosniff');
 
@@ -29,7 +29,6 @@ class ErrorController extends AbstractController
         } elseif ($statusCode === 500) {
             $response->setContent('<h1>Erreur interne du serveur (500)</h1>');
         }
-
         return $response;
     }
 }

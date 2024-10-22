@@ -27,6 +27,7 @@ class ReservationController extends AbstractController
         if (isset($_GET['date'])) {
             $chosenDate = \DateTime::createFromFormat('Y-m-d', $_GET['date']) ?? ""; // Récupération de la date dans l'url
             $sameDays = $res->findByDate($chosenDate->setTime(0, 0, 0), $room); // Récupération des réservations existantes pour la même date
+
             foreach ($sameDays as $day) {
                 $start = $day->getStart(); // Heure de début d'une réservation existante
                 $end = $day->getEndReservation(); // Heure de fin d'une réservation existante
@@ -63,25 +64,26 @@ class ReservationController extends AbstractController
                     $interrupt = true; // On marque qu'il y a un conflit
                     break; // Sortir des deux boucles (éviter des calculs inutiles)
                 }
+            }
 
-                // Si un conflit de réservation est détecté
-                if ($interrupt === true) {
-                    $this->addFlash('error', 'Il y a conflit de réservation avec une autre réservation.');
-                    return $this->redirectToRoute('app_room_show', ['id' => $id]);
-                } else {
-                    $reservation
-                        ->setUser($user)
-                        ->setRoom($room)
-                        ->setValidated("pending");
+            // Si un conflit de réservation est détecté
+            if ($interrupt === true) {
+                $this->addFlash('error', 'Il y a conflit de réservation avec une autre réservation.');
+                return $this->redirectToRoute('app_room_show', ['id' => $id]);
+            } else {
+                $reservation
+                    ->setUser($user)
+                    ->setRoom($room)
+                    ->setValidated("pending");
 
-                    $em->persist($reservation);
-                    $em->flush();
+                $em->persist($reservation);
+                $em->flush();
 
-                    $this->addFlash('success', 'Votre réservation a bien été prise en compte, un administrateur la validera prochainement.');
-                    return $this->redirectToRoute('app_room_show', ['id' => $id]);
-                }
+                $this->addFlash('success', 'Votre réservation a bien été prise en compte, un administrateur la validera prochainement.');
+                return $this->redirectToRoute('app_room_show', ['id' => $id]);
             }
         }
+
         // Si le formulaire n'est pas soumis ou n'est pas encore valide, rendre le formulaire
         return $this->render('reservation/verif.html.twig', [
             'room' => $room,
